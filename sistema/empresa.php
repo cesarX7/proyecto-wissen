@@ -1,3 +1,7 @@
+<?php
+include 'bd/bd.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,10 +61,10 @@
         <div class="container">
           <div class="page-inner">
             <div class="page-header">
-              <h3 class="fw-bold mb-3">DataTables.Net</h3>
+              <h3 class="fw-bold mb-3">Empresa</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                  <a href="#">
+                  <a href="index.php">
                     <i class="icon-home"></i>
                   </a>
                 </li>
@@ -68,13 +72,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Tables</a>
+                  <a href="#">configuraciones</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Datatables</a>
+                  <a href="#">Empresa</a>
                 </li>
               </ul>
             </div>
@@ -82,7 +86,7 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4 class="card-title">Multi Filter Select</h4>
+                    <h4 class="card-title">Empresa</h4>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
@@ -92,26 +96,49 @@
                       >
                         <thead>
                           <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>id</th>
+                            <th>razon_social</th>
+                            <th>Ruc</th>
+                            <th>telefono</th>
+                            <th>imagen</th>
+                            <th>pestaña</th>
                           </tr>
                         </thead>
                         <tfoot>
                           <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>id</th>
+                            <th>razon_social</th>
+                            <th>Ruc</th>
+                            <th>telefono</th>
+                            <th>imagen</th>
+                            <th>pestaña</th>
                           </tr>
                         </tfoot>
                         <tbody>
+                            <?php
+                              $sql = "select id, razon_social, ruc, telefono, imagen, pestaña  from empresa";
+                              $stmt =  $conn->prepare($sql);
+                              $stmt->execute();
 
+                              $empresas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                              foreach($empresas as $empresa){
+                                  echo "<tr>";
+                                    echo "<td>{$empresa['id']}</td>";
+                                    echo "<td>{$empresa['razon_social']}</td>";
+                                    echo "<td>{$empresa['ruc']}</td>";
+                                    echo "<td>{$empresa['telefono']}</td>";
+
+                                    if(!empty($empresa['imagen'])){
+                                    echo "<td><img src= '{$empresa['imagen']}' alt='Logo' class='img-thumbnail' style='width: 50px; height: 50px; object-fit: cover;'</td> "; 
+                                    } else {
+                                      echo "<td><span class='text-muted'>Sin imagen</span></td>";
+                                    }
+
+                                    echo "<td>{$empresa['pestaña']}</td>"; 
+                                  echo "</tr>";
+                              }
+                            ?>                        
                         </tbody>
                       </table>
                     </div>

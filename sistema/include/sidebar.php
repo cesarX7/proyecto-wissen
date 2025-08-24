@@ -5,7 +5,7 @@
           <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
               <img
-                src="assets/img/kaiadmin/logo_light.svg"
+                src="assets/img/capichi.png"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20"
